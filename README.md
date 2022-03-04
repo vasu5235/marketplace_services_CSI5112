@@ -1,4 +1,4 @@
-# marketplace_services_CSI5112
+# Marketplace Services - CSI 5112 #Group number 13
 Backend services for Marketplace project - CSI 5112 Software Engineering at uOttawa
 
 ## Setup:
