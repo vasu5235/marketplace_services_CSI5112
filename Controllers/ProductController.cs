@@ -12,36 +12,36 @@ namespace marketplace_services_CSI5112.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CategoryController : ControllerBase
+public class ProductController : ControllerBase
 {
-    private readonly CategoryService _categoryService;
+    private readonly ProductService _productService;
 
-    public CategoryController(CategoryService cs)
+    public ProductController(ProductService ps)
     {
-        this._categoryService = cs;
+        this._productService = ps;
     }
 
     [HttpGet]
-    public List<Category> Get()
+    public List<Product> Get()
     {
-        return _categoryService.GetCategories();
+        return _productService.GetProducts();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Category>> GetCategory(int id)
+    public async Task<ActionResult<Product>> GetProduct(int id)
     {
-        Console.WriteLine("--- debug ---- category.Id: " + id);
+        Console.WriteLine("--- debug ---- product.Id: " + id);
 
-        Category category = await _categoryService.GetCategory(id);
-        if (category == null)
+        Product product = await _productService.GetProduct(id);
+        if (product == null)
             return NotFound();
-        return category;
+        return product;
     }
 
     [HttpPost]
-    public async Task<ActionResult<bool>> AddCategory(Category category)
+    public async Task<ActionResult<bool>> AddProduct(Product product)
     {
-        bool result = await _categoryService.CreateCategory(category);
+        bool result = await _productService.AddProduct(product);
 
         return result;
     }

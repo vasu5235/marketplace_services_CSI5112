@@ -3,44 +3,41 @@ using marketplace_services_CSI5112.Models;
 
 namespace marketplace_services_CSI5112.Services
 {
-    public class CategoryService
+    public class ProductService
     {
-        private readonly List<Category> categories = new()
+        private readonly List<Product> products = new()
         {
-            new Category(1, "Cloth", "images/category_images/01.png"),
-            new Category(2, "Electronics", "images/category_images/02.png"),
-            new Category(3, "Food", "images/category_images/03.png"),
-            new Category(4, "Sports", "images/category_images/04.png"),
-            new Category(5, "Books", "images/category_images/05.png"),
-            new Category(6, "Health Care", "images/category_images/06.png"),
-            new Category(7, "Category-1", "images/category_images/07.png"),
-            new Category(8, "Category-2", "images/category_images/08.png"),
-
+            new Product(1, "Test-1","Sample description1", 100.0, "images/recent_images/01.jpeg","Electronics"),
+            new Product(2, "Test-2", "Sample description2", 200.0, "images/recent_images/02.jpeg", "Electronics"),
+            new Product(3, "Test-3", "Sample description3", 300.0, "images/recent_images/03.jpeg", "Electronics"),
+            new Product(4, "Test-4", "Sample description4", 400.0, "images/recent_images/04.jpeg", "Electronics"),
+            new Product(5, "Test-5", "Sample description5", 500.0, "images/recent_images/05.jpeg", "Electronics"),
+            new Product(6, "Test-6", "Sample description6", 600.0, "images/recent_images/06.jpeg", "Electronics"),
         };
 
-        public CategoryService()
+        public ProductService()
         {
         }
 
-        public List<Category> GetCategories()
+        public List<Product> GetProducts()
         {
-            return this.categories;
+            return this.products;
         }
 
-        public async Task<Category> GetCategory(int Id)
+        public async Task<Product> GetProduct(int Id)
         {
-            return categories.Find(x => x.Id.Equals(Id));
+            return products.Find(x => x.Id.Equals(Id));
         }
 
 
-        // returns false if category exists with newCategory.Id
-        public async Task<bool> CreateCategory(Category newCategory)
+        // returns false if product exists with newProduct.Id
+        public async Task<bool> AddProduct(Product newProduct)
         {
-            Category existingCategory = categories.Find(x => x.Id == newCategory.Id);
+            Product existingProduct = products.Find(x => x.Id == newProduct.Id);
             
-            if (existingCategory == null)
+            if (existingProduct == null)
             {
-                categories.Add(newCategory);
+                products.Add(newProduct);
                 return true;
             }
 
