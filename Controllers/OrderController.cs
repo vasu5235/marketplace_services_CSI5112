@@ -12,36 +12,42 @@ namespace marketplace_services_CSI5112.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CategoryController : ControllerBase
+public class OrderController : ControllerBase
 {
-    private readonly CategoryService _categoryService;
+    private readonly OrderService _orderService;
 
-    public CategoryController(CategoryService cs)
+    public OrderController(OrderService os)
     {
-        this._categoryService = cs;
+        this._orderService = os;
     }
 
     [HttpGet]
-    public List<Category> Get()
+    public Dictionary<int, List<Product>> Get()
     {
-        return _categoryService.GetCategories();
+        return _orderService.GetOrders();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Category>> GetCategory(int id)
+    public async Task<ActionResult<List<Product>>> GetOrder(int id)
     {
-        Console.WriteLine("--- debug ---- category.Id: " + id);
+        Console.WriteLine("--- debug ---- order.Id: " + id);
 
-        Category category = await _categoryService.GetCategory(id);
-        if (category == null)
+        bool orderExists = await _orderService.OrderExists(id);
+
+        if (!orderExists)
             return NotFound();
-        return category;
+
+        else
+        {
+            List<Product> order = await _orderService.GetOrder(id);
+            return order;
+        }
     }
 
     [HttpPost]
-    public async Task<ActionResult<bool>> AddCategory(Category category)
+    public async Task<ActionResult<bool>> AddOrder(int id, List<Product> products)
     {
-        bool result = await _categoryService.CreateCategory(category);
+        bool result = await _orderService.AddOrder(id, products);
 
         return result;
     }
