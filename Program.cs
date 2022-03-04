@@ -21,7 +21,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Services DI
-builder.Services.AddSingleton<EmployeeService>();
+builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<CategoryService>();
+builder.Services.AddSingleton<ProductService>();
+builder.Services.AddSingleton<OrderService>();
 
 var app = builder.Build();
 
