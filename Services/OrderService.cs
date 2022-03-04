@@ -3,44 +3,62 @@ using marketplace_services_CSI5112.Models;
 
 namespace marketplace_services_CSI5112.Services
 {
-    public class CategoryService
+    public class OrderService
     {
-        private readonly List<Category> categories = new()
+        private readonly Dictionary<int, List<Product>> orders = new()
         {
-            new Category(1, "Cloth", "images/category_images/01.png"),
-            new Category(2, "Electronics", "images/category_images/02.png"),
-            new Category(3, "Food", "images/category_images/03.png"),
-            new Category(4, "Sports", "images/category_images/04.png"),
-            new Category(5, "Books", "images/category_images/05.png"),
-            new Category(6, "Health Care", "images/category_images/06.png"),
-            new Category(7, "Category-1", "images/category_images/07.png"),
-            new Category(8, "Category-2", "images/category_images/08.png"),
-
+            {
+                1, new List<Product> () {
+                    new Product(1, "iPhone 123","Sample description1", 100.0, "images/product_images/iphone.jpg","Electronics"),
+                    new Product(2, "iPhone 3", "Sample description2", 200.0, "images/product_images/iphone.jpg", "Electronics"),
+                    new Product(3, "iPhone 10", "Sample description3", 300.0, "images/product_images/iphone.jpg", "Electronics"),
+                }
+            },
+            {
+                2,
+                new List<Product>() {
+                    new Product(1, "iPhone 456","Sample description1", 190.0, "images/product_images/iphone.jpg","Electronics"),
+                    new Product(2, "iPhone 30", "Sample description2", 280.0, "images/product_images/iphone.jpg", "Electronics"),
+                    new Product(3, "iPhone 7", "Sample description3", 360.0, "images/product_images/iphone.jpg", "Electronics"),
+                }
+            },
+            {
+                3,
+                new List<Product>() {
+                    new Product(1, "iPhone 345","Sample description1", 109.0, "images/product_images/iphone.jpg","Electronics"),
+                    new Product(2, "iPhone 9", "Sample description2", 208.0, "images/product_images/iphone.jpg", "Electronics"),
+                    new Product(3, "iPhone 5", "Sample description3", 307.0, "images/product_images/iphone.jpg", "Electronics"),
+                }
+            }
         };
 
-        public CategoryService()
+        public async Task<bool> OrderExists(int id)
+        {
+            return orders.ContainsKey(id);
+        }
+
+        public OrderService()
         {
         }
 
-        public List<Category> GetCategories()
+        public Dictionary<int,List<Product>> GetOrders()
         {
-            return this.categories;
+            return this.orders;
         }
 
-        public async Task<Category> GetCategory(int Id)
+        public async Task<List<Product>> GetOrder(int Id)
         {
-            return categories.Find(x => x.Id.Equals(Id));
+            return orders[Id];
         }
 
 
         // returns false if category exists with newCategory.Id
-        public async Task<bool> CreateCategory(Category newCategory)
+        public async Task<bool> AddOrder(int id, List<Product> order)
         {
-            Category existingCategory = categories.Find(x => x.Id == newCategory.Id);
-            
-            if (existingCategory == null)
+            Console.Write("---debug--- order.Id = " + id);
+            if (!orders.ContainsKey(id))
             {
-                categories.Add(newCategory);
+                orders.Add(id, order);
                 return true;
             }
 
