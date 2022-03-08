@@ -3,15 +3,32 @@ using marketplace_services_CSI5112.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 //allow cors
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      builder =>
-                      {
-                          builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-                      });
-});
+//var MyAllowSpecificOrigins = "*";
+
+//var MyAllowSpecificOrigins = "http://localhost:50213";
+//var MyAllowSpecificOrigins = "http://localhost:50213";
+
+//var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+//var MyAllowSpecificOrigins = "http://localhost:51845";
+
+
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy(name: MyAllowSpecificOrigins,
+//                       builder =>
+//                       {
+//                           builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+//                       });
+// });
+
+builder.Services.AddCors();
+builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
+
+// builder.Services.AddCors(builder => builder
+//      .AllowAnyOrigin()
+//      .AllowAnyMethod()
+//      .AllowAnyHeader()
+//      );
 
 // Add services to the container.
 
@@ -34,6 +51,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(
+        options => options.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod()
+    );
+
+app.UseMvc();
 
 app.UseHttpsRedirection();
 
