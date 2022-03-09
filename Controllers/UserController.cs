@@ -21,7 +21,7 @@ public class UserController : ControllerBase
         return _userService.GetUsers();
     }
 
-    [HttpGet("{email}/{password}")]
+    [HttpPost("{email}/{password}")]
     public async Task<ActionResult<Boolean>> ValidateUser(String email, String password)
     {
         //Console.WriteLine("--- user email and password: " + email + " " + password);
