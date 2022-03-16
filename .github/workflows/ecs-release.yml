@@ -1,0 +1,35 @@
+name: ECS Release
+
+on:
+  workflow_dispatch:
+  release: 
+    types: created
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: 620174838346.dkr.ecr.us-east-1.amazonaws.com
+  ECS_SERVICE: app-marketplace-service
+  ECS_CLUSTER: app-mp-cluster
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+        
+    - name: Docker build
+      run: |
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 620174838346.dkr.ecr.us-east-1.amazonaws.com
+        docker build -t marketplace_services13 .
+        docker tag marketplace_services13:latest 620174838346.dkr.ecr.us-east-1.amazonaws.com/marketplace_services13:latest
+        docker push 620174838346.dkr.ecr.us-east-1.amazonaws.com/marketplace_services13:latest
+        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment --region $AWS_REGION
