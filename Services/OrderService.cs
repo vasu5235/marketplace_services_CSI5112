@@ -8,7 +8,8 @@ namespace marketplace_services_CSI5112.Services
         private readonly Dictionary<int, List<Product>> orders = new()
         {
             {
-                1, new List<Product> () {
+                1,
+                new List<Product>() {
                     new Product(1, "iPhone 123","Sample description1", 100.0, "images/product_images/iphone.jpg","Electronics"),
                     new Product(2, "iPhone 3", "Sample description2", 200.0, "images/product_images/iphone.jpg", "Electronics"),
                     new Product(3, "iPhone 10", "Sample description3", 300.0, "images/product_images/iphone.jpg", "Electronics"),
@@ -41,7 +42,7 @@ namespace marketplace_services_CSI5112.Services
         {
         }
 
-        public Dictionary<int,List<Product>> GetOrders()
+        public Dictionary<int, List<Product>> GetOrders()
         {
             return this.orders;
         }
