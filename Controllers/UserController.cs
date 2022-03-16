@@ -21,13 +21,25 @@ public class UserController : ControllerBase
         return _userService.GetUsers();
     }
 
-    [HttpGet("{email}/{password}")]
-    public async Task<ActionResult<Boolean>> ValidateUser(String email, String password)
-    {
-        //Console.WriteLine("--- user email and password: " + email + " " + password);
+    //[HttpPost("{email}/{password}")]
+    //public async Task<ActionResult<Boolean>> ValidateUser(String email, String password)
+    //{
+    //    Console.WriteLine("--- user email and password: " + email + " " + password);
 
-        Boolean isValidUser = await _userService.ValidateUser(email, password);
-        return isValidUser;
+    //    Boolean isValidUser = await _userService.ValidateUser(email, password);
+    //    return isValidUser;
+    //}
+
+    [HttpPost("{email}/{password}")]
+    public async Task<ActionResult<User>> ValidateUser(String email, String password)
+    {
+        Console.WriteLine("--- user email and password: " + email + " " + password);
+
+        User user = await _userService.ValidateUser(email, password);
+        if (user == null)
+            return NotFound();
+
+        return user;
     }
 
     [HttpPost]

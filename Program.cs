@@ -57,7 +57,7 @@ app.UseCors(
 
 app.UseMvc();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
