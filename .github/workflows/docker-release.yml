@@ -3,7 +3,8 @@ name: Docker Publish
 on:
   release:
     types: created
-  workflow_dispatch:
+  push:
+    branches: [ test/continous-build ]
 
 jobs:
   build:
