@@ -9,8 +9,9 @@ namespace marketplace_services_CSI5112.Models
         public string Description { get; set; }
         public string Category { get; set; }
         public double Price { get; set; }
+        public int Quantity { get; set; }
 
-        public Product(int Id, string Name, string Description, double Price, string ImageUrl, string Category)
+        public Product(int Id, string Name, string Description, double Price, string ImageUrl, string Category, int Quantity)
         {
             this.Id = Id;
             this.Name = Name;
@@ -18,6 +19,7 @@ namespace marketplace_services_CSI5112.Models
             this.Price = Price;
             this.ImageUrl = ImageUrl;
             this.Category = Category;
+            this.Quantity = Quantity;
         }
     }
 }

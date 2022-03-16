@@ -8,8 +8,9 @@ namespace marketplace_services_CSI5112.Services
 
         private readonly List<User> users = new()
         {
-            new User(1,"Vasu Mistry","vmist089@uottawa.ca", "123456"),
-            new User(2,"Test user","test@uottawa.ca", "123456"),
+            new User(1,"Vasu Mistry","vmist089@uottawa.ca", "123456",false),
+            new User(2,"Test user","test@uottawa.ca", "123456",false),
+            new User(3, "Merchant", "merchant@marketplace.ca", "123456", true),
 
         };
 
@@ -27,15 +28,26 @@ namespace marketplace_services_CSI5112.Services
             return users.Find(x => x.Email.Equals(Email));
         }
 
-        public async Task<Boolean> ValidateUser(string email, string password)
+        //public async Task<Boolean> ValidateUser(string email, string password)
+        //{
+        //    User user = users.Find(x => x.Email.Equals(email));
+        //    if (user == null)
+        //        return false;
+
+        //    if (user.Password.Equals(password))
+        //        return true;
+        //    return false;
+        //}
+
+        public async Task<User> ValidateUser(string email, string password)
         {
             User user = users.Find(x => x.Email.Equals(email));
             if (user == null)
-                return false;
+                return null;
 
             if (user.Password.Equals(password))
-                return true;
-            return false;
+                return user;
+            return null;
         }
 
         // returns false if user exists with newUser.Id.

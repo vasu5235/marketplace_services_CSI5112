@@ -1,0 +1,27 @@
+name: Docker Publish
+
+on:
+  release:
+    types: created
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      
+    - name: Docker login
+      uses: docker/login-action@v1
+      with:
+        username: vasu5235
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+    - name: Docker build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{ env.GITHUB_WORKSPACE }}
+        file: ${{ env.GITHUB_WORKSPACE }}/Dockerfile
+        tags: vasu5235/marketplace_services13:latest
+        push: true

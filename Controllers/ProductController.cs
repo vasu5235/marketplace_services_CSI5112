@@ -38,6 +38,30 @@ public class ProductController : ControllerBase
         return product;
     }
 
+    [HttpGet("search/{productName}")]
+    public async Task<List<Product>> SearchProducts(String productName)
+    {
+        Console.WriteLine("--- debug ---- product.name: " + productName);
+
+        List<Product> searchedProducts = await _productService.SearchProducts(productName);
+
+        if (searchedProducts.Count == 0)
+            return new List<Product>();
+        return searchedProducts;
+    }
+
+    [HttpGet("search-cat/{categoryName}")]
+    public async Task<List<Product>> SearchCategoryProducts(String categoryName)
+    {
+        Console.WriteLine("--- debug ---- product.name: " + categoryName);
+
+        List<Product> searchedProducts = await _productService.SearchCategoryProducts(categoryName);
+
+        if (searchedProducts.Count == 0)
+            return new List<Product>();
+        return searchedProducts;
+    }
+
     [HttpPost]
     public async Task<ActionResult<bool>> AddProduct(Product product)
     {
