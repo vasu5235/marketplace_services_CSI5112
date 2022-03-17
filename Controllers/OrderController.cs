@@ -22,13 +22,13 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet]
-    public Dictionary<int, List<Product>> Get()
+    public Dictionary<String, List<Product>> Get()
     {
         return _orderService.GetOrders();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<List<Product>>> GetOrder(int id)
+    public async Task<ActionResult<List<Product>>> GetOrder(String id)
     {
         Console.WriteLine("--- debug ---- order.Id: " + id);
 
@@ -45,7 +45,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<bool>> AddOrder(int id, List<Product> products)
+    public async Task<ActionResult<bool>> AddOrder(String id, List<Product> products)
     {
         bool result = await _orderService.AddOrder(id, products);
 
