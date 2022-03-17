@@ -8,9 +8,10 @@ namespace marketplace_services_CSI5112.Services
 
         private readonly List<User> users = new()
         {
-            new User(1,"Vasu Mistry","vmist089@uottawa.ca", "123456",false),
-            new User(2,"Test user","test@uottawa.ca", "123456",false),
-            new User(3, "Merchant", "merchant@marketplace.ca", "123456", true),
+            new User(1, "Vasu Mistry", "vmist089@uottawa.ca", "123456", false),
+            new User(2, "Rushi Patel", "rpate159@uottawa.ca", "654321", false),
+            new User(3, "Test user", "test@uottawa.ca", "123456", false),
+            new User(4, "Merchant", "merchant@marketplace.ca", "123456", true),
 
         };
 

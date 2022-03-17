@@ -23,14 +23,14 @@ namespace marketplace_services_CSI5112.Services
                     new Product(3, "iPhone 7", "Sample description3", 360.0, "images/product_images/iphone.jpg", "Electronics",1),
                 }
             },
-            {
-                3,
-                new List<Product>() {
-                    new Product(1, "iPhone 345","Sample description1", 109.0, "images/product_images/iphone.jpg","Electronics",1),
-                    new Product(2, "iPhone 9", "Sample description2", 208.0, "images/product_images/iphone.jpg", "Electronics",1),
-                    new Product(3, "iPhone 5", "Sample description3", 307.0, "images/product_images/iphone.jpg", "Electronics",1),
-                }
-            }
+            // {
+            //     3,
+            //     new List<Product>() {
+            //         new Product(1, "iPhone 345","Sample description1", 109.0, "images/product_images/iphone.jpg","Electronics",1),
+            //         new Product(2, "iPhone 9", "Sample description2", 208.0, "images/product_images/iphone.jpg", "Electronics",1),
+            //         new Product(3, "iPhone 5", "Sample description3", 307.0, "images/product_images/iphone.jpg", "Electronics",1),
+            //     }
+            // }
         };
 
         public async Task<bool> OrderExists(int id)
