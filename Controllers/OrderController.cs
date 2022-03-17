@@ -27,21 +27,30 @@ public class OrderController : ControllerBase
         return _orderService.GetOrders();
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<List<Product>>> GetOrder(String id)
+    [HttpGet("byUser/{UserId}")]
+    public Dictionary<String, List<Product>> GetOrdersByUser(String UserId)
     {
-        Console.WriteLine("--- debug ---- order.Id: " + id);
+        Dictionary<String, List<Product>> FilteredOrders = _orderService.GetOrdersByUserId(UserId);
 
-        bool orderExists = await _orderService.OrderExists(id);
+        //maybe used here
+        //if (FilteredOrders.Count == 0)
+        //    return NotFound();
+        return FilteredOrders;
+    }
 
-        if (!orderExists)
-            return NotFound();
+    [HttpGet("byOrder/{OrderId}")]
+    public async Task<ActionResult<List<Product>>> GetOrder(String OrderId)
+    {
+        Console.WriteLine("--- debug ---- order.Id: " + OrderId);
 
-        else
-        {
-            List<Product> order = await _orderService.GetOrder(id);
-            return order;
-        }
+        //maybe used here
+        //bool orderExists = await _orderService.OrderExists(id);
+
+        //if (!orderExists)
+        //    return NotFound();
+
+        List<Product> order = await _orderService.GetOrdersByOrderId(OrderId);
+        return order;
     }
 
     [HttpPost]

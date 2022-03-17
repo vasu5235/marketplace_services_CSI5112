@@ -21,7 +21,7 @@ namespace marketplace_services_CSI5112.Services
             }
             },
             {
-                "222-333",
+                "111-333",
                 new List<Product>() {
                     new Product(1, "iPhone 456","Sample description1", 190.0, "images/product_images/iphone.jpg","Electronics",1),
                     new Product(2, "iPhone 30", "Sample description2", 280.0, "images/product_images/iphone.jpg", "Electronics",1),
@@ -52,9 +52,37 @@ namespace marketplace_services_CSI5112.Services
             return this.orders;
         }
 
-        public async Task<List<Product>> GetOrder(String Id)
+        public Dictionary<String, List<Product>> GetOrdersByUserId(String UserId)
         {
-            return orders[Id];
+            Dictionary<String, List<Product>> FilteredOrders = new();
+
+            foreach (KeyValuePair<String, List<Product>> currentOrder in this.orders)
+            {
+                String _UserId = currentOrder.Key.Split('-')[0];
+
+                if (_UserId == UserId)
+                {
+                    FilteredOrders.Add(currentOrder.Key, currentOrder.Value);
+                }
+            }
+
+            return FilteredOrders;
+        }
+
+        public async Task<List<Product>> GetOrdersByOrderId(String OrderId)
+        {
+            List<Product> FilteredOrders = new();
+            foreach (KeyValuePair<String, List<Product>> currentOrder in this.orders)
+            {
+                String _OrderId = currentOrder.Key.Split('-')[1];
+
+                if (_OrderId == OrderId)
+                {
+                    FilteredOrders = currentOrder.Value;
+                }
+            }
+
+            return FilteredOrders;
         }
 
 
