@@ -5,10 +5,15 @@ namespace marketplace_services_CSI5112.Services
 {
     public class OrderService
     {
-        private readonly Dictionary<int, List<Product>> orders = new()
+        //private readonly List<Orders> orders2 = new()
+        //{
+        //    new Orders(1, 2, new Product(1, "iPhone 123", "Sample description1", 100.0, "images/product_images/iphone.jpg", "Electronics", 1),
+        //};
+
+        private readonly Dictionary<String, List<Product>> orders = new()
         {
             {
-                1,
+                "111-222",
                 new List<Product>() {
                     new Product(1, "iPhone 123","Sample description1", 100.0, "images/product_images/iphone.jpg","Electronics",1),
                     new Product(2, "iPhone 3", "Sample description2", 200.0, "images/product_images/iphone.jpg", "Electronics",1),
@@ -16,24 +21,25 @@ namespace marketplace_services_CSI5112.Services
             }
             },
             {
-                2,
+                "111-333",
                 new List<Product>() {
                     new Product(1, "iPhone 456","Sample description1", 190.0, "images/product_images/iphone.jpg","Electronics",1),
                     new Product(2, "iPhone 30", "Sample description2", 280.0, "images/product_images/iphone.jpg", "Electronics",1),
                     new Product(3, "iPhone 7", "Sample description3", 360.0, "images/product_images/iphone.jpg", "Electronics",1),
                 }
             },
-            // {
-            //     3,
-            //     new List<Product>() {
-            //         new Product(1, "iPhone 345","Sample description1", 109.0, "images/product_images/iphone.jpg","Electronics",1),
-            //         new Product(2, "iPhone 9", "Sample description2", 208.0, "images/product_images/iphone.jpg", "Electronics",1),
-            //         new Product(3, "iPhone 5", "Sample description3", 307.0, "images/product_images/iphone.jpg", "Electronics",1),
-            //     }
-            // }
+
+            {
+                "444-555",
+                new List<Product>() {
+                    new Product(1, "iPhone 345","Sample description1", 109.0, "images/product_images/iphone.jpg","Electronics",1),
+                    new Product(2, "iPhone 9", "Sample description2", 208.0, "images/product_images/iphone.jpg", "Electronics",1),
+                    new Product(3, "iPhone 5", "Sample description3", 307.0, "images/product_images/iphone.jpg", "Electronics",1),
+                }
+            }
         };
 
-        public async Task<bool> OrderExists(int id)
+        public async Task<bool> OrderExists(String id)
         {
             return orders.ContainsKey(id);
         }
@@ -42,19 +48,47 @@ namespace marketplace_services_CSI5112.Services
         {
         }
 
-        public Dictionary<int, List<Product>> GetOrders()
+        public Dictionary<String, List<Product>> GetOrders()
         {
             return this.orders;
         }
 
-        public async Task<List<Product>> GetOrder(int Id)
+        public Dictionary<String, List<Product>> GetOrdersByUserId(String UserId)
         {
-            return orders[Id];
+            Dictionary<String, List<Product>> FilteredOrders = new();
+
+            foreach (KeyValuePair<String, List<Product>> currentOrder in this.orders)
+            {
+                String _UserId = currentOrder.Key.Split('-')[0];
+
+                if (_UserId == UserId)
+                {
+                    FilteredOrders.Add(currentOrder.Key, currentOrder.Value);
+                }
+            }
+
+            return FilteredOrders;
+        }
+
+        public async Task<List<Product>> GetOrdersByOrderId(String OrderId)
+        {
+            List<Product> FilteredOrders = new();
+            foreach (KeyValuePair<String, List<Product>> currentOrder in this.orders)
+            {
+                String _OrderId = currentOrder.Key.Split('-')[1];
+
+                if (_OrderId == OrderId)
+                {
+                    FilteredOrders = currentOrder.Value;
+                }
+            }
+
+            return FilteredOrders;
         }
 
 
         // returns false if category exists with newCategory.Id
-        public async Task<bool> AddOrder(int id, List<Product> order)
+        public async Task<bool> AddOrder(String id, List<Product> order)
         {
             Console.Write("---debug--- order.Id = " + id);
             if (!orders.ContainsKey(id))
