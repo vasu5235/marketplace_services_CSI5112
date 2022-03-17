@@ -13,14 +13,15 @@ namespace marketplace_services_CSI5112.Services
         private readonly Dictionary<String, List<Product>> orders = new()
         {
             {
-                "111-222", new List<Product> () {
+                "111-222",
+                new List<Product>() {
                     new Product(1, "iPhone 123","Sample description1", 100.0, "images/product_images/iphone.jpg","Electronics",1),
                     new Product(2, "iPhone 3", "Sample description2", 200.0, "images/product_images/iphone.jpg", "Electronics",1),
                     new Product(3, "iPhone 10", "Sample description3", 300.0, "images/product_images/iphone.jpg", "Electronics",1),
-                }
+            }
             },
             {
-                "333-444",
+                "222-333",
                 new List<Product>() {
                     new Product(1, "iPhone 456","Sample description1", 190.0, "images/product_images/iphone.jpg","Electronics",1),
                     new Product(2, "iPhone 30", "Sample description2", 280.0, "images/product_images/iphone.jpg", "Electronics",1),
@@ -28,7 +29,7 @@ namespace marketplace_services_CSI5112.Services
                 }
             },
             {
-                "555-666",
+                "444-555",
                 new List<Product>() {
                     new Product(1, "iPhone 345","Sample description1", 109.0, "images/product_images/iphone.jpg","Electronics",1),
                     new Product(2, "iPhone 9", "Sample description2", 208.0, "images/product_images/iphone.jpg", "Electronics",1),
