@@ -36,7 +36,7 @@ namespace marketplace_services_CSI5112.Services
 
         public async Task<List<Product>> SearchCategoryProducts(String categoryName)
         {
-            return products.FindAll(p => p.Category.ToLower().Contains(categoryName));
+            return products.FindAll(p => p.Category.ToLower().Contains(categoryName.ToLower()));
         }
 
 
