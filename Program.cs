@@ -42,6 +42,8 @@ builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<CategoryService>();
 builder.Services.AddSingleton<ProductService>();
 builder.Services.AddSingleton<OrderService>();
+builder.Services.AddSingleton<QuestionService>();
+builder.Services.AddSingleton<AnswerService>();
 
 var app = builder.Build();
 
