@@ -20,7 +20,7 @@ namespace marketplace_services_CSI5112.Services
         {
         }
 
-        public List<Question> GetAllQuestions()
+        public async Task<List<Question>> GetAllQuestions()
         {
             return this.questions;
         }

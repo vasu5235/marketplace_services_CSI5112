@@ -22,9 +22,9 @@ public class QuestionController : ControllerBase
     }
 
     [HttpGet]
-    public List<Question> Get()
+    public async Task<List<Question>>  Get()
     {
-        return _questionService.GetAllQuestions();
+        return await _questionService.GetAllQuestions();
     }
 
     [HttpGet("{id}")]
