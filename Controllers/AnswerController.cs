@@ -24,24 +24,40 @@ public class AnswerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<Answer>>> Get()
     {
-        return await _answerService.GetAllAnswers();
+        List<Answer> allAnswers = await _answerService.GetAllAnswers();
+        if (allAnswers.Count == 0)
+            return NotFound("No answers found in database");
+        return allAnswers;
     }
 
     [HttpGet("{questionId}")]
     public async Task<ActionResult<List<Answer>>> GetAnswers(int questionId)
     {
+
+        if (questionId == null)
+            return BadRequest("questionId cannot be null");
+
         Console.WriteLine("--- debug ---- question.Id: " + questionId);
 
         List<Answer> findAllAnswers = await _answerService.GetAnswers(questionId);
-        if (findAllAnswers == null)
-            return NotFound();
+
+        if (findAllAnswers.Count == 0)
+            return NotFound("No answers found for this questionId");
         return findAllAnswers;
     }
 
     [HttpPost]
     public async Task<ActionResult<bool>> AddAnswer(Answer answer)
     {
+
+        if (answer.Id == null || answer.Description == null
+            || answer.QuestionId == null || answer.UserName == null)
+            return BadRequest("One of the body params was found null");
+
         bool result = await _answerService.AddAnswer(answer);
+
+        if (result == false)
+            return BadRequest("Answer with same id exists in db");
 
         return result;
     }
