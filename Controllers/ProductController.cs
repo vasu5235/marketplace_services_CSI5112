@@ -22,9 +22,13 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public List<Product> Get()
+    public async Task<ActionResult<List<Product>>> Get()
     {
-        return _productService.GetProducts();
+        List<Product> products = await _productService.GetProducts();
+        if (products.Count == 0)
+            return NoContent();
+        else
+            return products;
     }
 
     [HttpGet("{id}")]
@@ -67,6 +71,13 @@ public class ProductController : ControllerBase
     {
         bool result = await _productService.AddProduct(product);
 
+        return result;
+    }
+
+    [HttpDelete("{Id}")]
+    public async Task<ActionResult<bool>> DeleteProduct(int Id)
+    {
+        bool result = await _productService.DeleteProductById(Id);
         return result;
     }
 }

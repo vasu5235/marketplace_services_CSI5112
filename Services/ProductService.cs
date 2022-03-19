@@ -5,7 +5,7 @@ namespace marketplace_services_CSI5112.Services
 {
     public class ProductService
     {
-        private readonly List<Product> products = new()
+        private List<Product> products = new()
         {
             new Product(1, "Test-1","Sample description1", 100.0, "images/recent_images/01.jpeg","Electronics",1),
             new Product(2, "Test-2", "Sample description2", 200.0, "images/recent_images/02.jpeg", "Electronics",1),
@@ -19,7 +19,7 @@ namespace marketplace_services_CSI5112.Services
         {
         }
 
-        public List<Product> GetProducts()
+        public async Task<List<Product>> GetProducts()
         {
             return this.products;
         }
@@ -53,6 +53,37 @@ namespace marketplace_services_CSI5112.Services
 
             return false;
 
+        }
+
+        public async Task<bool> DeleteProductById (int productId)
+        {
+            Product productExists = await GetProduct(productId);
+
+            if (productExists == null)
+                return false;
+            else
+            {
+                this.products = products.Where(x => !x.Id.Equals(productId)).ToList();
+                return true;
+            }
+           
+        }
+
+        public async Task<bool> DeleteProductsByCategory(string categoryName)
+        {
+            List<Product> categoryProducts = await SearchCategoryProducts(categoryName);
+
+            if (categoryProducts.Count == 0)
+                return true;
+            else
+            {
+                foreach (Product p in categoryProducts)
+                {
+                    System.Diagnostics.Debug.WriteLine("Deleting product: " + p.Name);
+                    await DeleteProductById(p.Id);
+                }
+                return true;
+            }
         }
     }
 }

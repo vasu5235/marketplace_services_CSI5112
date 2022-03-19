@@ -5,7 +5,7 @@ namespace marketplace_services_CSI5112.Services
 {
     public class CategoryService
     {
-        private readonly List<Category> categories = new()
+        private List<Category> categories = new()
         {
             new Category(1, "Cloth", "images/category_images/01.png"),
             new Category(2, "Electronics", "images/category_images/02.png"),
@@ -33,10 +33,11 @@ namespace marketplace_services_CSI5112.Services
         }
 
 
-        // returns false if category exists with newCategory.Id
+        // returns false if category exists with newCategory.Id or newCategory.Name
         public async Task<bool> CreateCategory(Category newCategory)
         {
-            Category existingCategory = categories.Find(x => x.Id == newCategory.Id);
+            // search for existing category with same id or same name.
+            Category existingCategory = categories.Find(x => (x.Id == newCategory.Id) || (x.Name == newCategory.Name));
             
             if (existingCategory == null)
             {
@@ -45,6 +46,21 @@ namespace marketplace_services_CSI5112.Services
             }
 
             return false;
+
+        }
+
+        // returns false if category does not exists with categoryId
+        public async Task<Category> DeleteCategory(int categoryId)
+        {
+            Category existingCategory = categories.Find(x => x.Id == categoryId);
+
+            if (existingCategory != null)
+            {
+                System.Diagnostics.Debug.WriteLine("Deleting category: " + existingCategory.Id);
+                this.categories = categories.Where(x => !x.Id.Equals(categoryId)).ToList();
+            }
+            
+            return existingCategory;
 
         }
     }
