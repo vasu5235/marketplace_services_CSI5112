@@ -40,16 +40,16 @@ public class UserController : ControllerBase
     public async Task<ActionResult<User>> ValidateUser(String email, String password)
     {
         if (email == null || password == null)
-            return NotFound("Either email or password was null");
+            return BadRequest("Either email or password was null");
 
         if (!IsValidEmail(email))
-            return NotFound("Incorrect email format");
+            return BadRequest("Incorrect email format");
 
         Console.WriteLine("--- user email and password: " + email + " " + password);
 
         User user = await _userService.ValidateUser(email, password);
         if (user == null)
-            return NotFound();
+            return NotFound("User not found with these credentials");
 
         return user;
     }

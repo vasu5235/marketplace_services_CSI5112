@@ -35,7 +35,7 @@ public class OrderController : ControllerBase
     public async Task<ActionResult<Dictionary<String, List<Product>>>> GetOrdersByUser(String UserId)
     {
         if (UserId == null)
-            return NotFound("Userid cannot be null");
+            return BadRequest("Userid cannot be null");
 
         Dictionary<String, List<Product>> FilteredOrders = await _orderService.GetOrdersByUserId(UserId);
 
@@ -49,13 +49,13 @@ public class OrderController : ControllerBase
     public async Task<ActionResult<List<Product>>> GetOrder(String OrderId)
     {
         if (OrderId == null)
-            return NotFound("Orderid cannot be null");
+            return BadRequest("Orderid cannot be null");
         Console.WriteLine("--- debug ---- order.Id: " + OrderId);
 
         List<Product> order = await _orderService.GetOrdersByOrderId(OrderId);
 
         if (order.Count == 0)
-            return NotFound("No products found for this orderid");
+            return NotFound("No orders found for this orderid");
 
         return order;
     }
@@ -64,10 +64,10 @@ public class OrderController : ControllerBase
     public async Task<ActionResult<bool>> AddOrder(String id, List<Product> products)
     {
         if (id == null || products.Count == 0)
-            return NotFound("Either id is null or productList is empty");
+            return BadRequest("Either id is null or productList is empty");
 
         if (id.Split('-').Length != 2)
-            return NotFound("OrderId path param should be in format 'userId-orderId' example 123-456");
+            return BadRequest("OrderId path param should be in format 'userId-orderId' example 123-456");
 
         bool result = await _orderService.AddOrder(id, products);
 
