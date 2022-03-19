@@ -27,14 +27,14 @@ namespace marketplace_services_CSI5112.Services
         
         public async Task<Question> GetQuestion(int Id)
         {
-            return questions.Find(x => x.Id.Equals(Id));
+            return questions.Find(x => x.Id == Id);
         }
 
 
         // returns false if category exists with newCategory.Id
         public async Task<bool> CreateQuestion(Question newQuestion)
         {
-            Question existingQuestion = questions.Find(x => x.Id.Equals(newQuestion.Id));
+            Question existingQuestion = questions.Find(x => x.Id == newQuestion.Id);
             
             if (existingQuestion == null)
             {
@@ -52,7 +52,7 @@ namespace marketplace_services_CSI5112.Services
             if (q.Count == 0)
                 return false;
 
-            this.questions = questions.Where(x => ! x.Id.Equals(Id)).ToList();
+            this.questions = questions.Where(x => !(x.Id == Id)).ToList();
             return true;
         }
     }

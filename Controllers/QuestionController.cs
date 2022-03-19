@@ -22,34 +22,52 @@ public class QuestionController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Question>>>  Get()
+    public async Task<ActionResult<List<Question>>> Get()
     {
-        return await _questionService.GetAllQuestions();
+        List<Question> allQuestions = await _questionService.GetAllQuestions();
+
+        if (allQuestions.Count == 0)
+            return NotFound("No Questions exists currently in database");
+        return allQuestions;
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Question>> GetQuestion(int id)
     {
+        if (id == null)
+            return NotFound("questionId cannot be null");
+
         Console.WriteLine("--- debug ---- question.Id: " + id);
 
         Question question = await _questionService.GetQuestion(id);
         if (question == null)
-            return NotFound();
+            return NotFound("No Question found for this id");
+
         return question;
     }
 
     [HttpPost]
     public async Task<ActionResult<bool>> AddQuestion(Question question)
     {
+        if (question.Id == null || question.Title == null || question.Description == null || question.UserName == null)
+            return NotFound("Error: One of the body parameters in null");
         bool result = await _questionService.CreateQuestion(question);
 
+        if (result == false)
+            return BadRequest("Question with id already exists");
         return result;
     }
 
     [HttpDelete("{Id}")]
     public async Task<ActionResult<bool>> DeleteQuestion(int Id)
     {
+        if (Id == null)
+            return NotFound("Error: One of the body parameters in null");
+
         bool result = await _questionService.DeleteQuestion(Id);
+
+        if (result == false)
+            return BadRequest("Question with id does not exists");
 
         return result;
     }
