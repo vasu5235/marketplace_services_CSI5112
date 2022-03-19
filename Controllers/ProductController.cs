@@ -85,7 +85,7 @@ public class ProductController : ControllerBase
         bool result = await _productService.AddProduct(product);
 
         if (result == false)
-            return NotFound("Product with same id or name exists");
+            return BadRequest("Product with same id or name exists");
 
         return result;
     }
@@ -114,7 +114,7 @@ public class ProductController : ControllerBase
         bool result = await _productService.DeleteProductById(Id);
 
         if (result == false)
-            return NotFound("Cannot delete product because it does not exist");
+            return BadRequest("Cannot delete product because it does not exist");
 
         return result;
     }
