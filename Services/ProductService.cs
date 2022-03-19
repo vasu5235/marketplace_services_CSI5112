@@ -26,7 +26,7 @@ namespace marketplace_services_CSI5112.Services
 
         public async Task<Product> GetProduct(int Id)
         {
-            return products.Find(x => x.Id.Equals(Id));
+            return products.Find(x => x.Id == Id);
         }
 
         public async Task<List<Product>> SearchProducts(String productName)
@@ -43,7 +43,7 @@ namespace marketplace_services_CSI5112.Services
         // returns false if product exists with newProduct.Id
         public async Task<bool> AddProduct(Product newProduct)
         {
-            Product existingProduct = products.Find(x => x.Id == newProduct.Id);
+            Product existingProduct = products.Find(x => x.Id == newProduct.Id || x.Name.ToLower().Equals(newProduct.Name.ToLower()) );
             
             if (existingProduct == null)
             {
@@ -95,7 +95,7 @@ namespace marketplace_services_CSI5112.Services
                 return false;
             else
             {
-                this.products = products.Where(x => !x.Id.Equals(productId)).ToList();
+                this.products = products.Where(x => !(x.Id == productId) ).ToList();
                 return true;
             }
            
