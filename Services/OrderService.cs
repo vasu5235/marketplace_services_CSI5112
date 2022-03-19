@@ -59,9 +59,10 @@ namespace marketplace_services_CSI5112.Services
 
             foreach (KeyValuePair<String, List<Product>> currentOrder in this.orders)
             {
+                //order dictionary key is of format: userId-orderId
                 String _UserId = currentOrder.Key.Split('-')[0];
 
-                if (_UserId == UserId)
+                if (_UserId.Equals(UserId))
                 {
                     FilteredOrders.Add(currentOrder.Key, currentOrder.Value);
                 }
@@ -75,9 +76,13 @@ namespace marketplace_services_CSI5112.Services
             List<Product> FilteredOrders = new();
             foreach (KeyValuePair<String, List<Product>> currentOrder in this.orders)
             {
+                //order dictionary key is of format: userId-orderId
+                if (currentOrder.Key.Split('-').Length != 2)
+                    continue;
+
                 String _OrderId = currentOrder.Key.Split('-')[1];
 
-                if (_OrderId == OrderId)
+                if (_OrderId.Equals(OrderId))
                 {
                     FilteredOrders = currentOrder.Value;
                 }

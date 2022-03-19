@@ -26,38 +26,62 @@ public class CategoryController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<Category>>> Get()
     {
-        return await _categoryService.GetCategories();
+        List<Category> allCategories = await _categoryService.GetCategories();
+
+        if (allCategories.Count == 0)
+            return NotFound("No categories exist in database");
+
+        return allCategories;
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Category>> GetCategory(int id)
     {
+        if (id == null)
+            return BadRequest("category id cannot be null");
+
         Console.WriteLine("--- debug ---- category.Id: " + id);
 
         Category category = await _categoryService.GetCategory(id);
+
         if (category == null)
-            return NotFound();
+            return NotFound("Category does not exist with this id");
+
         return category;
     }
 
     [HttpPost]
     public async Task<ActionResult<bool>> AddCategory(Category category)
     {
+        if (category.Id == null || category.Name == null || category.ImageURL == null)
+            return BadRequest("One of the body params was null");
+
         bool result = await _categoryService.CreateCategory(category);
 
-        return result;
+        if (result == false)
+            return BadRequest("Category with same id or name already exists");
+
+        return true;
     }
 
     [HttpPut]
     public async Task<ActionResult<bool>> EditCategory(Category editedCategory)
     {
+        if (editedCategory.Id == null || editedCategory.Name == null || editedCategory.ImageURL == null)
+            return BadRequest("One of the body params was null");
+
         bool result = false;
         String oldCategoryName = await _categoryService.EditCategory(editedCategory);
+
         if (oldCategoryName == null)
-            return BadRequest();
+            return BadRequest("No existing category found with the passed category id value");
+
         else if (!oldCategoryName.Equals(editedCategory.Name))
         {
+            // if category name was changed, update all products to reflect this
             System.Diagnostics.Debug.WriteLine("Category edited, now editing all associated products");
+
+            //always returns true; 
             result = await _productService.EditProductsForCategory(oldCategoryName, editedCategory.Name);
         }
         else
@@ -70,14 +94,20 @@ public class CategoryController : ControllerBase
     [HttpDelete("{Id}")]
     public async Task<ActionResult<bool>> DeleteCategory(int Id)
     {
+        if (Id == null)
+            return BadRequest("Id cannot be null");
+
         bool result = false;
+
         Category deletedCategory = await _categoryService.DeleteCategory(Id);
 
         if (deletedCategory == null)
-            return NotFound();
+            return NotFound("No category found with passed Id param");
         else
         {
+            //delete all associated products with this category
             System.Diagnostics.Debug.WriteLine("Category deleted, now deleting all associated products");
+            //always returns true;
             result = await _productService.DeleteProductsByCategory(deletedCategory.Name);
         }
 
