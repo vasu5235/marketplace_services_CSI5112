@@ -24,9 +24,9 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    public List<Category> Get()
+    public async Task<ActionResult<List<Category>>> Get()
     {
-        return _categoryService.GetCategories();
+        return await _categoryService.GetCategories();
     }
 
     [HttpGet("{id}")]

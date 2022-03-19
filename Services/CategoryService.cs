@@ -22,7 +22,7 @@ namespace marketplace_services_CSI5112.Services
         {
         }
 
-        public List<Category> GetCategories()
+        public async Task<List<Category>> GetCategories()
         {
             return this.categories;
         }

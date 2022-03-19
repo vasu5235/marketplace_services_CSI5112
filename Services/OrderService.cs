@@ -48,12 +48,12 @@ namespace marketplace_services_CSI5112.Services
         {
         }
 
-        public Dictionary<String, List<Product>> GetOrders()
+        public async Task<Dictionary<String, List<Product>>> GetOrders()
         {
             return this.orders;
         }
 
-        public Dictionary<String, List<Product>> GetOrdersByUserId(String UserId)
+        public async Task<Dictionary<String, List<Product>>> GetOrdersByUserId(String UserId)
         {
             Dictionary<String, List<Product>> FilteredOrders = new();
 

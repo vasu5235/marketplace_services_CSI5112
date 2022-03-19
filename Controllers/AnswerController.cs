@@ -22,9 +22,9 @@ public class AnswerController : ControllerBase
     }
 
     [HttpGet]
-    public List<Answer> Get()
+    public async Task<ActionResult<List<Answer>>> Get()
     {
-        return _answerService.GetAllAnswers();
+        return await _answerService.GetAllAnswers();
     }
 
     [HttpGet("{questionId}")]

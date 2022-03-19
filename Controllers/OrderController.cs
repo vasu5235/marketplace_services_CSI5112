@@ -22,15 +22,15 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet]
-    public Dictionary<String, List<Product>> Get()
+    public async Task<ActionResult<Dictionary<String, List<Product>>>> Get()
     {
-        return _orderService.GetOrders();
+        return await _orderService.GetOrders();
     }
 
     [HttpGet("byUser/{UserId}")]
-    public Dictionary<String, List<Product>> GetOrdersByUser(String UserId)
+    public async Task<ActionResult<Dictionary<String, List<Product>>>> GetOrdersByUser(String UserId)
     {
-        Dictionary<String, List<Product>> FilteredOrders = _orderService.GetOrdersByUserId(UserId);
+        Dictionary<String, List<Product>> FilteredOrders = await _orderService.GetOrdersByUserId(UserId);
 
         //maybe used here
         //if (FilteredOrders.Count == 0)
