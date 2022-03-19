@@ -19,7 +19,7 @@ namespace marketplace_services_CSI5112.Services
         {
         }
 
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
             return this.users;
         }
@@ -54,7 +54,7 @@ namespace marketplace_services_CSI5112.Services
         // returns false if user exists with newUser.Id.
         public async Task<bool> CreateUser(User newUser)
         {
-            User existingUser = users.Find(x => x.Id == newUser.Id);
+            User existingUser = users.Find(x => x.Id == newUser.Id || x.Email.Equals(newUser.Email));
 
             if (existingUser == null)
             {
