@@ -74,6 +74,15 @@ public class ProductController : ControllerBase
         return result;
     }
 
+    [HttpPut]
+    public async Task<ActionResult<bool>> EditProduct (Product product)
+    {
+        bool result = await _productService.EditProduct(product);
+        if (result == false)
+            return NotFound();
+        return result;
+    }
+
     [HttpDelete("{Id}")]
     public async Task<ActionResult<bool>> DeleteProduct(int Id)
     {

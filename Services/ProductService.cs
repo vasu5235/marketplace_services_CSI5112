@@ -55,6 +55,38 @@ namespace marketplace_services_CSI5112.Services
 
         }
 
+        public async Task<bool> EditProduct(Product editedProduct)
+        {
+            int existingProductIndex = products.FindIndex(x => x.Id == editedProduct.Id);
+
+            if (existingProductIndex == -1)
+                return false;
+            else
+            {
+                this.products[existingProductIndex] = editedProduct;
+                return true;
+            }
+
+        }
+
+        public async Task<bool> EditProductsForCategory(string oldCategoryName, string newCategoryName)
+        {
+            List<Product> productsInThisCategory = await SearchCategoryProducts(oldCategoryName);
+
+            if (productsInThisCategory.Count != 0)
+            {
+                foreach (Product p in productsInThisCategory)
+                {
+                    System.Diagnostics.Debug.WriteLine("Editing categoryname for product: " + p.Name);
+                    int index = this.products.FindIndex(x => x.Category.ToLower().Equals(oldCategoryName.ToLower()));
+                    if (index != -1)
+                        this.products[index].Category = newCategoryName;
+                }
+            }
+
+            return true;
+        }
+
         public async Task<bool> DeleteProductById (int productId)
         {
             Product productExists = await GetProduct(productId);

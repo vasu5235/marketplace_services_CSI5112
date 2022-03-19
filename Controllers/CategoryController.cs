@@ -48,6 +48,25 @@ public class CategoryController : ControllerBase
         return result;
     }
 
+    [HttpPut]
+    public async Task<ActionResult<bool>> EditCategory(Category editedCategory)
+    {
+        bool result = false;
+        String oldCategoryName = await _categoryService.EditCategory(editedCategory);
+        if (oldCategoryName == null)
+            return BadRequest();
+        else if (!oldCategoryName.Equals(editedCategory.Name))
+        {
+            System.Diagnostics.Debug.WriteLine("Category edited, now editing all associated products");
+            result = await _productService.EditProductsForCategory(oldCategoryName, editedCategory.Name);
+        }
+        else
+        {
+            result = true;
+        }
+        return result;
+    }
+
     [HttpDelete("{Id}")]
     public async Task<ActionResult<bool>> DeleteCategory(int Id)
     {

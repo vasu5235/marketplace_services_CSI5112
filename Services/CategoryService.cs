@@ -37,7 +37,7 @@ namespace marketplace_services_CSI5112.Services
         public async Task<bool> CreateCategory(Category newCategory)
         {
             // search for existing category with same id or same name.
-            Category existingCategory = categories.Find(x => (x.Id == newCategory.Id) || (x.Name == newCategory.Name));
+            Category existingCategory = categories.Find(x => (x.Id == newCategory.Id) || (x.Name.Equals(newCategory.Name)));
             
             if (existingCategory == null)
             {
@@ -46,6 +46,27 @@ namespace marketplace_services_CSI5112.Services
             }
 
             return false;
+
+        }
+
+        public async Task<string> EditCategory(Category editedCategory)
+        {
+            Category categoryWithSameName = categories.Find(x => x.Name.ToLower().Equals(editedCategory.Name.ToLower()));
+
+            if (categoryWithSameName != null)
+                return null;
+            else
+            {
+                int existingCategoryIndex = categories.FindIndex(x => (x.Id == editedCategory.Id));
+                if (existingCategoryIndex == -1)
+                    return null;
+                else
+                {
+                    string existingCategoryName = this.categories[existingCategoryIndex].Name;
+                    this.categories[existingCategoryIndex] = editedCategory;
+                    return existingCategoryName;
+                }
+            }
 
         }
 
