@@ -35,3 +35,9 @@ Backend services for Marketplace project - CSI 5112 Software Engineering at uOtt
 ## Documentation
 
 1. Inside `/documentation` folder, you can find our documentation for Data Model and API Collection
+
+## Continoud Deployment
+
+1. Deployments are triggered for every new release and can be run manually (if user has permissions) from the `Actions` tab
+2. `docker-release.yml` - Builds and uploads a new docker image of the services
+3. `ecs-release.yml` - Deploys docker public image to ECR and deploys to ECS and utilizes two loadbalancers.
