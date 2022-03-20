@@ -18,7 +18,7 @@ Backend services for Marketplace project - CSI 5112 Software Engineering at uOtt
 5. ECS_SERVICE: app-marketplace-service
 6. ECS_CLUSTER: app-mp-cluster
 
-## Running locally through docker:
+## Running locally through docker (currently preferred):
 
 1. Install docker on your machine: https://docs.docker.com/get-docker/
 2. Run from terminal: docker run --pull=always -p 80:80 vasu5235/marketplace_services13
