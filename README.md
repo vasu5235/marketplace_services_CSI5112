@@ -25,9 +25,13 @@ Backend services for Marketplace project - CSI 5112 Software Engineering at uOtt
 
 ## Testing
 
-1. Download postman collection json files from `/documentation` folder 
+1. Download postman collection json files from `/QA` folder 
 2. Import the collection json files in Postman on your local machine
 3. Configure URL parameter - Right click on imported collection and click on **Variables**
 4. Set variable name to **url** and initial & current value as the API endpoints e.g. https://localhost:7136/api or http://3.93.177.49/api
 
 ## NOTE: Please pull docker image on your local machine to test our APIs.
+
+## Documentation
+
+1. Inside `/documentation` folder, you can find our documentation for Data Model and API Collection
