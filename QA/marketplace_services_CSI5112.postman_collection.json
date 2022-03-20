@@ -1,0 +1,860 @@
+{
+	"info": {
+		"_postman_id": "49338192-19bd-4854-b2e3-e8ae71e33f0c",
+		"name": "marketplace_services_CSI5112",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/User",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\": 17,\n    \"name\": \"Vra\",\n    \"email\": \"vbaxi010@uottawa.ca\",\n    \"password\": \"hchcvhj\",\n    \"isMerchant\": false\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/User",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by email and password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/User/test%40uottawa.ca/123456",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"User",
+								"test%40uottawa.ca",
+								"123456"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get Category Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Category/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\": 9,\n    \"imageURL\": \"images/category_images/09.png\",\n    \"name\": \"Category-3\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"imageURL\": \"images/category_images/01.png\",\n        \"name\": \"NON-Cloth\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Category/8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get Order Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order by Orderid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Order/byOrder/333",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Order",
+								"byOrder",
+								"333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n      \"id\": 1,\n      \"name\": \"iPhone 123\",\n      \"imageUrl\": \"images/product_images/iphone.jpg\",\n      \"description\": \"Sample description1\",\n      \"category\": \"Electronics\",\n      \"price\": 100,\n      \"quantity\": 1\n    },\n    {\n      \"id\": 2,\n      \"name\": \"iPhone 3\",\n      \"imageUrl\": \"images/product_images/iphone.jpg\",\n      \"description\": \"Sample description2\",\n      \"category\": \"Electronics\",\n      \"price\": 200,\n      \"quantity\": 1\n    },\n    {\n      \"id\": 3,\n      \"name\": \"iPhone 10\",\n      \"imageUrl\": \"images/product_images/iphone.jpg\",\n      \"description\": \"Sample description3\",\n      \"category\": \"Electronics\",\n      \"price\": 300,\n      \"quantity\": 1\n    }\n  ]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Order?id=111-444",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Order"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "111-444"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order by Userid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Order/byUser/111",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Order",
+								"byUser",
+								"111"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Product Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product/11",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by ProductName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product/search/test-11",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product",
+								"search",
+								"test-11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by CategoryName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product/search-cat/electronics",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product",
+								"search-cat",
+								"electronics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\": 7,\n    \"name\": \"Test-7\",\n    \"imageUrl\": \"images/recent_images/07.jpeg\",\n    \"description\": \"Sample description7\",\n    \"category\": \"Electronics\",\n    \"price\": 500,\n    \"quantity\": 0\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product/11",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"name\": \"Test-111\",\n        \"imageUrl\": \"images/recent_images/01.jpeg\",\n        \"description\": \"Sample description1\",\n        \"category\": \"Electronics\",\n        \"price\": 100,\n        \"quantity\": 1\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Answer",
+			"item": [
+				{
+					"name": "Get Answer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Answer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Answer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\": 14,\n    \"questionId\": 3,\n    \"description\": \"Yes I agree, same applies for Winter too.\",\n    \"userName\": \"Esra Ersan\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Answer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Answer by Question id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Answer/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Answer",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Question",
+			"item": [
+				{
+					"name": "Get Question",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Question",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Question",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 14,\n    \"title\": \"tenth Question\",\n    \"description\": \"A suit of armor provides excellent sun protection on hot days.\",\n    \"userName\": \"Esra Ersan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Question",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Question by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Question/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Question",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Question by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Question/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Question",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

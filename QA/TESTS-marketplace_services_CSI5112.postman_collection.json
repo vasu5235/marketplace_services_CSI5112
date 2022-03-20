@@ -1,0 +1,1620 @@
+{
+	"info": {
+		"_postman_id": "e52c8585-82f6-4b3b-a522-45ef345f5cf2",
+		"name": "TESTS-marketplace_services_CSI5112",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"",
+									"{  const response = pm.response.json();",
+									" console.log(response[0].name)",
+									"   pm.test(\"Status code is 200:Users found and no other input is null\", function () {",
+									"   pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.email).not.eql(null);",
+									"    pm.expect(response.password).not.eql(null);",
+									"    pm.expect(response.isMerchant).not.eql(null);",
+									"",
+									"}); ",
+									"}",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No User found\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404)",
+									"});",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/User",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{console.log(pm.response)",
+									"",
+									"    pm.test(\"Status Code 200:User Successfully added\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"if(pm.response.code == 404)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 404:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\": 15,\n    \"name\": \"Vr\",\n    \"email\": \"vba@ufnwiuf.cocd\",\n    \"password\": \"gvbjhjhj\",\n    \"isMerchant\": false\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/User",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by email and password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"",
+									"{  const response = pm.response.json();",
+									" console.log(response.name)",
+									"   pm.test(\"Status code is 200 and no other input is null\", function () {",
+									"   pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.email).not.eql(null);",
+									"    pm.expect(response.password).not.eql(null);",
+									"    pm.expect(response.isMerchant).not.eql(null);",
+									"",
+									"}); ",
+									"}",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:User already exist with same email id\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404)",
+									"});",
+									"}",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/User/test%40uottawa.ca/123456",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"User",
+								"test%40uottawa.ca",
+								"123456"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get Category Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"",
+									"{  const response = pm.response.json();",
+									" console.log(response[0].name)",
+									"   pm.test(\"Status code is 200:All categories found and no other input is null\", function () {",
+									"   pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"",
+									"}); ",
+									"}",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Category found\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404)",
+									"});",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Found Category by id\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    console.log(response.name);",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Category with given id exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"No Category Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Category/28",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category",
+								"28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{console.log(pm.response)",
+									"",
+									"    pm.test(\"Status Code 200:Category Successfully added\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\": 9,\n    \"imageURL\": \"images/category_images/09.png\",\n    \"name\": \"Category-3\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 200:Category Successfully edited\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"imageURL\": \"images/category_images/01.png\",\n        \"name\": \"NON-Cloth\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 200:Category Successfully Deleted\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Category with given id exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"No Category Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Category/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Category",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get Order Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response)",
+									"",
+									"if(pm.response.code == 200)",
+									"",
+									"{  const response = pm.response.json();",
+									" console.log(response.name)",
+									"   pm.test(\"Status code is 200: Successfully got all orders and no other input is null\", function () {",
+									"   pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"}); ",
+									"}",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Orders found\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404)",
+									"});",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order by Orderid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Found Order by Order id\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    console.log(response.name);",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Order with given Order id exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"No Order Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Order/byOrder/222",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Order",
+								"byOrder",
+								"222"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"const response =pm.response.json();",
+									"console.log(response)",
+									"if(pm.response.code == 200)",
+									"{",
+									"    if(response == true)",
+									"    {    ",
+									"    pm.test(\"Status Code 200:Order Successfully added\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"        pm.expect(response).to.eql(true);",
+									"});}",
+									"    if(response == false)",
+									"    {    pm.test(\"Status Code 200:Order Already exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"        pm.expect(response).to.eql(false);",
+									"});",
+									"",
+									"    }",
+									"",
+									"    ",
+									"",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n      \"id\": 1,\n      \"name\": \"iPhone 123\",\n      \"imageUrl\": \"images/product_images/iphone.jpg\",\n      \"description\": \"Sample description1\",\n      \"category\": \"Electronics\",\n      \"price\": 100,\n      \"quantity\": 1\n    },\n    {\n      \"id\": 2,\n      \"name\": \"iPhone 3\",\n      \"imageUrl\": \"images/product_images/iphone.jpg\",\n      \"description\": \"Sample description2\",\n      \"category\": \"Electronics\",\n      \"price\": 200,\n      \"quantity\": 1\n    },\n    {\n      \"id\": 3,\n      \"name\": \"iPhone 10\",\n      \"imageUrl\": \"images/product_images/iphone.jpg\",\n      \"description\": \"Sample description3\",\n      \"category\": \"Electronics\",\n      \"price\": 300,\n      \"quantity\": 1\n    }\n  ]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Order?id=111-22",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Order"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "111-22"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order by Userid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Found Order by User id\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    console.log(response.name);",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Order with given User id exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"No Order Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Order/byUser/111",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Order",
+								"byUser",
+								"111"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Product Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"",
+									"{  const response = pm.response.json();",
+									" console.log(response[0].name)",
+									"   pm.test(\"Status code is 200 and no other input is null\", function () {",
+									"   pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"}); ",
+									"}",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404: No Product found\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404)",
+									"});",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Found Product by id\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    console.log(response.name);",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Product with given id exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"No Product Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product/null",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product",
+								"null"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by ProductName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 200:Found Product by Product Name\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    console.log(response.name);",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Product with given name exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 400:No Product Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product/search/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product",
+								"search",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by CategoryName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 200:Found Product by Category Name\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    console.log(response.name);",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Product with given Category name exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 400:No Product Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product/search-cat/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product",
+								"search-cat",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{console.log(pm.response)",
+									"",
+									"    pm.test(\"Status Code 200:Product Successfully added\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\": 11,\n    \"name\": \"Test-11\",\n    \"imageUrl\": \"images/recent_images/07.jpeg\",\n    \"description\": \"Sample description8\",\n    \"category\": \"Electronics\",\n    \"price\": 500,\n    \"quantity\": 10\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 200:Product Successfully Deleted\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Product/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 200:Product Successfully edited\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 5,\n        \"name\": \"Test-111\",\n        \"imageUrl\": \"images/recent_images/01.jpeg\",\n        \"description\": \"Sample description1\",\n        \"category\": \"Electronics\",\n        \"price\": 100,\n        \"quantity\": 1\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Answer",
+			"item": [
+				{
+					"name": "Get Answer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"",
+									"{  const response = pm.response.json();",
+									" console.log(response[0].title)",
+									"   pm.test(\"Status code is 200: Answers Found and no other input is null\", function () {",
+									"   pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(response.title).not.eql(null);",
+									"    pm.expect(response.userName).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"",
+									"}); ",
+									"}",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404: No Answer found\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404)",
+									"});",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Answer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Answer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{console.log(pm.response)",
+									"",
+									"    pm.test(\"Status Code 200:Answer Successfully added\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"if(pm.response.code == 404)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 404:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\": 11,\n    \"questionId\": 3,\n    \"description\": \"Yes I agree, same applies for Winter too.\",\n    \"userName\": \"Esra Ersan\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Answer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Answer by Question id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Found Answer by id\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    console.log(response.name);",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Answer with given id exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"No Answer Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Answer/null",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Answer",
+								"null"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Question",
+			"item": [
+				{
+					"name": "Get Question",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"",
+									"{  const response = pm.response.json();",
+									" console.log(response[0].title)",
+									"   pm.test(\"Status code is 200:Questions found and no other input is null\", function () {",
+									"   pm.expect(pm.response.code).to.eql(200)",
+									"    pm.expect(response.title).not.eql(null);",
+									"    pm.expect(response.userName).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"",
+									"}); ",
+									"}",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404: No Question found\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404)",
+									"});",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Question",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Question",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{console.log(pm.response)",
+									"",
+									"    pm.test(\"Status Code 200:Question Successfully added\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"if(pm.response.code == 404)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 404:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 13,\n    \"title\": \"tenth Question\",\n    \"description\": \"A suit of armor provides excellent sun protection on hot days.\",\n    \"userName\": \"Esra Ersan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Question",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Question by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"console.log(pm.response.code)",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Found Question by id\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    console.log(response.name);",
+									"    pm.expect(response.name).not.eql(null);",
+									"    pm.expect(response.imageUrl).not.eql(null);",
+									"    pm.expect(response.description).not.eql(null);",
+									"    pm.expect(response.category).not.eql(null);",
+									"    pm.expect(response.price).not.eql(null);",
+									"    pm.expect(response.quantity).not.eql(null);",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"if(pm.response.code == 404)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 404:No Question with given id exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"}",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"",
+									"    pm.test(\"No Question Exist\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Question/45",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Question",
+								"45"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Question by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"if(pm.response.code == 200)",
+									"{",
+									"",
+									"    pm.test(\"Status Code 200:Question Successfully Deleted\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    const response = pm.response.json();",
+									"    pm.expect(response).to.eql(true);",
+									"",
+									"",
+									"});",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"if(pm.response.code == 400)",
+									"{",
+									"console.log(pm.response)",
+									"    pm.test(\"Status Code 400:Please check Body tab for more information\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/Question/null",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Question",
+								"null"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
