@@ -52,6 +52,7 @@ namespace marketplace_services_CSI5112.Services
         public async Task<string> EditCategory(Category editedCategory)
         {
             int existingCategoryIndex = categories.FindIndex(x => (x.Id == editedCategory.Id));
+            //return if no category exists with this id
             if (existingCategoryIndex == -1)
                 return null;
             else
@@ -83,6 +84,7 @@ namespace marketplace_services_CSI5112.Services
         // returns false if category does not exists with categoryId
         public async Task<Category> DeleteCategory(int categoryId)
         {
+            //find existingcategory and return it so that all associated products can be deleted.
             Category existingCategory = categories.Find(x => x.Id == categoryId);
 
             if (existingCategory != null)

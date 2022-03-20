@@ -31,9 +31,10 @@ namespace marketplace_services_CSI5112.Services
         }
 
 
-        // returns false if category exists with newCategory.Id
+        // returns false if category exists with newQuestion.Id
         public async Task<bool> CreateQuestion(Question newQuestion)
         {
+            //check if question exists
             Question existingQuestion = questions.Find(x => x.Id == newQuestion.Id);
             
             if (existingQuestion == null)
@@ -48,6 +49,7 @@ namespace marketplace_services_CSI5112.Services
 
         public async Task<bool> DeleteQuestion(int Id)
         {
+            //check if question exists
             List<Question> q = questions.Where(x => x.Id == Id).ToList();
             if (q.Count == 0)
                 return false;

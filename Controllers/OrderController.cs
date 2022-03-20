@@ -21,6 +21,7 @@ public class OrderController : ControllerBase
         this._orderService = os;
     }
 
+    //returns all orders, key is of the format: userid-orderid
     [HttpGet]
     public async Task<ActionResult<Dictionary<String, List<Product>>>> Get()
     {
@@ -31,6 +32,7 @@ public class OrderController : ControllerBase
         return await _orderService.GetOrders();
     }
 
+    //returns all orders for given userId
     [HttpGet("byUser/{UserId}")]
     public async Task<ActionResult<Dictionary<String, List<Product>>>> GetOrdersByUser(String UserId)
     {
@@ -45,6 +47,7 @@ public class OrderController : ControllerBase
         return FilteredOrders;
     }
 
+    //returns all orders for given orderId
     [HttpGet("byOrder/{OrderId}")]
     public async Task<ActionResult<List<Product>>> GetOrder(String OrderId)
     {
@@ -60,12 +63,14 @@ public class OrderController : ControllerBase
         return order;
     }
 
+    //adds new order
     [HttpPost]
     public async Task<ActionResult<bool>> AddOrder(String id, List<Product> products)
     {
         if (id == null || products.Count == 0)
             return BadRequest("Either id is null or productList is empty");
 
+        //since we store id in format userid-orderid - check if given id is in correct format.
         if (id.Split('-').Length != 2)
             return BadRequest("OrderId path param should be in format 'userId-orderId' example 123-456");
 

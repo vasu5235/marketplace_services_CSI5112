@@ -21,6 +21,7 @@ public class ProductController : ControllerBase
         this._productService = ps;
     }
 
+    //returns all products
     [HttpGet]
     public async Task<ActionResult<List<Product>>> Get()
     {
@@ -31,6 +32,7 @@ public class ProductController : ControllerBase
         return products;
     }
 
+    //return product for a given productId
     [HttpGet("{id}")]
     public async Task<ActionResult<Product>> GetProduct(int id)
     {
@@ -44,6 +46,7 @@ public class ProductController : ControllerBase
         return product;
     }
 
+    //return list of products matching substring productName
     [HttpGet("search/{productName}")]
     public async Task<ActionResult<List<Product>>> SearchProducts(String productName)
     {
@@ -59,6 +62,8 @@ public class ProductController : ControllerBase
         return searchedProducts;
     }
 
+
+    //return list of products with associated category name matching substring categoryName
     [HttpGet("search-cat/{categoryName}")]
     public async Task<ActionResult<List<Product>>> SearchCategoryProducts(String categoryName)
     {
@@ -75,6 +80,7 @@ public class ProductController : ControllerBase
         return searchedProducts;
     }
 
+    //adds new product
     [HttpPost]
     public async Task<ActionResult<bool>> AddProduct(Product product)
     {
@@ -90,6 +96,7 @@ public class ProductController : ControllerBase
         return result;
     }
 
+    //updates existing product
     [HttpPut]
     public async Task<ActionResult<bool>> EditProduct (Product product)
     {
@@ -105,6 +112,7 @@ public class ProductController : ControllerBase
         return result;
     }
 
+    //deletes product with productId
     [HttpDelete("{Id}")]
     public async Task<ActionResult<bool>> DeleteProduct(int Id)
     {

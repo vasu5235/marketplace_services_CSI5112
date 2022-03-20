@@ -21,6 +21,7 @@ public class AnswerController : ControllerBase
         this._answerService = _as;
     }
 
+    //returns all answers in database
     [HttpGet]
     public async Task<ActionResult<List<Answer>>> Get()
     {
@@ -30,6 +31,7 @@ public class AnswerController : ControllerBase
         return allAnswers;
     }
 
+    // return all answers for a given questionId.
     [HttpGet("{questionId}")]
     public async Task<ActionResult<List<Answer>>> GetAnswers(int questionId)
     {
@@ -46,10 +48,12 @@ public class AnswerController : ControllerBase
         return findAllAnswers;
     }
 
+
+    //add new answer to database
     [HttpPost]
     public async Task<ActionResult<bool>> AddAnswer(Answer answer)
     {
-
+        //basic null checks
         if (answer.Id == null || answer.Description == null
             || answer.QuestionId == null || answer.UserName == null)
             return BadRequest("One of the body params was found null");

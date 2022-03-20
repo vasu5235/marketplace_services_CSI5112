@@ -23,6 +23,7 @@ public class CategoryController : ControllerBase
         this._productService = ps;
     }
 
+    //return all categories
     [HttpGet]
     public async Task<ActionResult<List<Category>>> Get()
     {
@@ -34,6 +35,7 @@ public class CategoryController : ControllerBase
         return allCategories;
     }
 
+    //returns category object for a given categoryId
     [HttpGet("{id}")]
     public async Task<ActionResult<Category>> GetCategory(int id)
     {
@@ -50,6 +52,7 @@ public class CategoryController : ControllerBase
         return category;
     }
 
+    //creates new category 
     [HttpPost]
     public async Task<ActionResult<bool>> AddCategory(Category category)
     {
@@ -64,6 +67,7 @@ public class CategoryController : ControllerBase
         return true;
     }
 
+    //update existing category
     [HttpPut]
     public async Task<ActionResult<bool>> EditCategory(Category editedCategory)
     {
@@ -91,6 +95,7 @@ public class CategoryController : ControllerBase
         return result;
     }
 
+    //delete a category with given Id.
     [HttpDelete("{Id}")]
     public async Task<ActionResult<bool>> DeleteCategory(int Id)
     {
