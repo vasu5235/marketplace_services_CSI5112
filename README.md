@@ -29,3 +29,5 @@ Backend services for Marketplace project - CSI 5112 Software Engineering at uOtt
 2. Import the collection json files in Postman on your local machine
 3. Configure URL parameter - Right click on imported collection and click on **Variables**
 4. Set variable name to **url** and initial & current value as the API endpoints e.g. https://localhost:7136/api or http://3.93.177.49/api
+
+## NOTE: Please use docker image to test our APIs.
