@@ -38,6 +38,7 @@ namespace marketplace_services_CSI5112.Services
         // returns false if category exists with newCategory.Id
         public async Task<bool> AddAnswer(Answer newAnswer)
         {
+            //check if answer exists
             Answer existingAnswer = answers.Find(x => (x.Id == newAnswer.Id));
             
             if (existingAnswer == null)

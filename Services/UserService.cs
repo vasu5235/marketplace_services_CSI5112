@@ -54,6 +54,7 @@ namespace marketplace_services_CSI5112.Services
         // returns false if user exists with newUser.Id.
         public async Task<bool> CreateUser(User newUser)
         {
+            //check if user exists
             User existingUser = users.Find(x => x.Id == newUser.Id || x.Email.Equals(newUser.Email));
 
             if (existingUser == null)

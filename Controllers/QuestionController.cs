@@ -21,6 +21,7 @@ public class QuestionController : ControllerBase
         this._questionService = qs;
     }
 
+    //returns all questions
     [HttpGet]
     public async Task<ActionResult<List<Question>>> Get()
     {
@@ -31,6 +32,7 @@ public class QuestionController : ControllerBase
         return allQuestions;
     }
 
+    //returns question for a given questionId
     [HttpGet("{id}")]
     public async Task<ActionResult<Question>> GetQuestion(int id)
     {
@@ -46,6 +48,7 @@ public class QuestionController : ControllerBase
         return question;
     }
 
+    //adds new question
     [HttpPost]
     public async Task<ActionResult<bool>> AddQuestion(Question question)
     {
@@ -58,6 +61,7 @@ public class QuestionController : ControllerBase
         return result;
     }
 
+    //delete question with given questionId
     [HttpDelete("{Id}")]
     public async Task<ActionResult<bool>> DeleteQuestion(int Id)
     {

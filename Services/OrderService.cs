@@ -5,11 +5,7 @@ namespace marketplace_services_CSI5112.Services
 {
     public class OrderService
     {
-        //private readonly List<Orders> orders2 = new()
-        //{
-        //    new Orders(1, 2, new Product(1, "iPhone 123", "Sample description1", 100.0, "images/product_images/iphone.jpg", "Electronics", 1),
-        //};
-
+        
         private readonly Dictionary<String, List<Product>> orders = new()
         {
             {
@@ -96,6 +92,7 @@ namespace marketplace_services_CSI5112.Services
         public async Task<bool> AddOrder(String id, List<Product> order)
         {
             Console.Write("---debug--- order.Id = " + id);
+            //id should be in format: userid-orderid, validation is done in the corresponding controller class
             if (!orders.ContainsKey(id))
             {
                 orders.Add(id, order);

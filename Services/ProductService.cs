@@ -71,6 +71,7 @@ namespace marketplace_services_CSI5112.Services
 
         public async Task<bool> EditProductsForCategory(string oldCategoryName, string newCategoryName)
         {
+            //find all products associated with this category
             List<Product> productsInThisCategory = await SearchCategoryProducts(oldCategoryName);
 
             if (productsInThisCategory.Count != 0)
@@ -112,6 +113,7 @@ namespace marketplace_services_CSI5112.Services
                 foreach (Product p in categoryProducts)
                 {
                     System.Diagnostics.Debug.WriteLine("Deleting product: " + p.Name);
+                    //delete product
                     await DeleteProductById(p.Id);
                 }
                 return true;
