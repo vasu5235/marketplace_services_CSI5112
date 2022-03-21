@@ -74,9 +74,9 @@ public class ProductController : ControllerBase
 
         List<Product> searchedProducts = await _productService.SearchCategoryProducts(categoryName);
 
-        if (searchedProducts.Count == 0)
-            return NotFound("No products found for this category name");
-       
+        // if (searchedProducts.Count == 0)
+        //     return NotFound("No products found for this category name");
+
         return searchedProducts;
     }
 
@@ -98,7 +98,7 @@ public class ProductController : ControllerBase
 
     //updates existing product
     [HttpPut]
-    public async Task<ActionResult<bool>> EditProduct (Product product)
+    public async Task<ActionResult<bool>> EditProduct(Product product)
     {
         if (product.Id == null || product.Name == null || product.Price == null
             || product.Quantity == null || product.Description == null)
