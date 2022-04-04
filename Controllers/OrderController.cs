@@ -29,7 +29,7 @@ public class OrderController : ControllerBase
 
         if (allOrders.Keys.Count == 0)
             return NotFound("No orders in database");
-        return await _orderService.GetOrders();
+        return allOrders;
     }
 
     //returns all orders for given userId
