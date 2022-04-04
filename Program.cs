@@ -1,4 +1,5 @@
 using marketplace_services_CSI5112.Services;
+using marketplace_services_CSI5112.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,20 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Changes for integrating MongoDB Atlas
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection(nameof(DatabaseSettings)));
+DatabaseSettings options = builder.Configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>();
+
+// override connection string from environment variables, you can also do the same for the rest
+//string connection_string = builder.Configuration.GetValue<string>("CONNECTION_STRING");
+//if (!string.IsNullOrEmpty(connection_string))
+//{
+//    options.ConnectionString = connection_string;
+//}
+
+builder.Services.AddSingleton<DatabaseSettings>();
 
 // Services DI
 builder.Services.AddSingleton<UserService>();
